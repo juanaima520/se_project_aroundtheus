@@ -7,12 +7,12 @@
   color: #545454;
   padding-top: 67px;
   padding-bottom: 60px;
+  margin: 0;
 }
 
 @media screen and (max-width: 480px) {
   .footer__title {
     font-size: 14px;
-    font-weight: 400;
     line-height: 16.94px;
     margin: 48px 19px 36px 19px;
     width: 100%;

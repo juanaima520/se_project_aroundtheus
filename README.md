@@ -1,26 +1,29 @@
 # Project 3: Around The U.S.
 
-this project work on a project called "Around The U.S." by createing an interactive page where users can add and remove photos, like photos of other users, and make a few minor adjustments to their own profile.
+This project work on a project called "Around The U.S." by createing an interactive page where users can add and remove photos, like photos of other users, and make a few minor adjustments to their own profile.
 
-### Overview
+Below is the technology i used for this project
 
-- Intro
+- git bash
+- github
 - Figma
-- Images
+- tinypng
+- Fonts
+- google
 
-**Intro**
-
-This project is made so all the elements are displayed correctly on popular screen sizes. We recommend investing more time in completing this project, since it's more difficult than previous ones.
-
-**Figma**
-
-- [Link to the project on Figma](https://www.figma.com/file/ii4xxsJ0ghevUOcssTlHZv/Sprint-3%3A-Around-the-US?node-id=0%3A1)
+**Figma** - [Link to the project on Figma](https://www.figma.com/file/ii4xxsJ0ghevUOcssTlHZv/Sprint-3%3A-Around-the-US?node-id=0%3A1)
 
 **Images**
+All the images are exporting directly from the Figma, then optimize them with [Link to tinypng](https://tinypng.com/)
 
-The way you'll do this at work is by exporting images directly from Figma — we recommend doing that to practice more. Don't forget to optimize them [here](https://tinypng.com/), so your project loads faster.
+**Fonts** [Fonts Link Here](https://rsms.me/inter/)
+
+**IMPROVEMENT**
+It is never too old to learn, I will come back keep update what I learned. To be continued......
 
 github page
-https://juanaima520.github.io/se_project_aroundtheus/
+[link here](https://juanaima520.github.io/se_project_aroundtheus/)
 
-Good luck and have fun!
+video [link here](https://www.loom.com/share/b2850386295a4a699897394060412835?sid=ae7aa9f2-42f6-49b6-bb1e-acf4aa58d1e7)
+
+Happy learning and coding everyday!!!!
