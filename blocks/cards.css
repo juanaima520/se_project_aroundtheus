@@ -17,6 +17,10 @@
   .cards {
     margin-top: 36px;
   }
+  .cards__list {
+    margin-left: 19px;
+    margin-right: 19px;
+  }
 }
 
 /*

@@ -46,10 +46,3 @@
   opacity: 0.5;
   /* background: transparent url(../images/like-active.svg) center no-repeat;*/
 }
-
-@media screen and (max-width: 480px) {
-  .card__list {
-    margin-left: 19px;
-    margin-right: 19px;
-  }
-}
