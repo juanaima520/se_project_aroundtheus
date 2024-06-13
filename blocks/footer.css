@@ -6,7 +6,6 @@
   text-align: left;
   color: #545454;
   padding-top: 67px;
-  padding-bottom: 60px;
   margin: 0;
 }
 
@@ -14,8 +13,12 @@
   .footer__title {
     font-size: 14px;
     line-height: 16.94px;
-    margin: 48px 19px 36px 19px;
+    margin: 48px 0 36px 0;
     width: 100%;
     padding: 0;
+  }
+
+  .footer {
+    width: 282px;
   }
 }

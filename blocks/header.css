@@ -1,5 +1,4 @@
 .header {
-  margin-top: 45px;
   border-bottom: 1px solid rgb(84 84 84 / 0.7); /*reviewer suggested use opacity, i could not find it on the figma*/
 }
 
@@ -11,10 +10,6 @@
 }
 
 @media screen and (max-width: 480px) {
-  .header {
-    margin-top: 28px;
-  }
-
   .header__image {
     width: 126px;
     height: 24px;
