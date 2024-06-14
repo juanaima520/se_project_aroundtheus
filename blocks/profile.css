@@ -140,6 +140,15 @@
     align-items: baseline;
   }
 
+  .profile__title {
+    margin-right: 10px;
+  }
+
+  .profile__image {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .profile__add-button {
     padding: 0;
   }
@@ -149,5 +158,6 @@
     width: 18px;
     padding: 0;
     padding-top: 12px;
+    margin-left: 0;
   }
 }
