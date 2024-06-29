@@ -35,7 +35,7 @@
         </section>
         <section class="cards page__section">
           <ul class="cards__list">
-            <li class="card">
+            <!-- <li class="card">
               <img
                 src="./images/bald-mountains.jpg"
                 alt="Bald Mountains"
@@ -91,12 +91,16 @@
               </div>
             </li>
             <li class="card">
-              <img src="./images/yosemite.jpg" alt="" class="card__image" />
+              <img
+                src="./images/yosemite.jpg"
+                alt="Yosemite"
+                class="card__image"
+              />
               <div class="card__description">
                 <h2 class="card__title">Yosemite</h2>
                 <button type="button" class="card__like-button"></button>
               </div>
-            </li>
+            </li> -->
           </ul>
         </section>
       </main>
@@ -114,18 +118,30 @@
             placeholder="Name"
             type="text"
             name="title"
+            id="profile-title-input"
             class="modal__input"
           />
           <input
             placeholder="Description"
             type="text"
             name="description"
+            id="profile-description-input"
             class="modal__input"
           />
           <button class="modal__button">Save</button>
         </form>
       </div>
     </div>
+
+    <template id="card__template">
+      <li class="card">
+        <img src="" alt="" class="card__image" />
+        <div class="card__description">
+          <h2 class="card__title"></h2>
+          <button type="button" class="card__like-button"></button>
+        </div>
+      </li>
+    </template>
 
     <script src="./scripts/index.js"></script>
   </body>
