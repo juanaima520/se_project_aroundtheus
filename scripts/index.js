@@ -36,6 +36,13 @@ const addCardModalCloseButton = profileAddModal.querySelector(
   "#modal-close-button"
 );
 
+const previewImageModal = document.querySelector("#preview-image-modal");
+const previewImage = document.querySelector(".modal__preview-image");
+const previewImageCloseButton = previewImageModal.querySelector(
+  "#modal-close-preview"
+);
+const previewImageName = document.querySelector(".modal__image-name");
+
 const profileTitle = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
 
@@ -70,9 +77,21 @@ function getCardElement(cardData) {
   const cardImageEl = cardElement.querySelector(".card__image");
   const cardTitleEl = cardElement.querySelector(".card__title");
   const likeButton = cardElement.querySelector(".card__like-button");
+  const deleteButton = cardElement.querySelector(".card__delete-button");
 
   likeButton.addEventListener("click", () => {
     likeButton.classList.toggle("card__like-button_active");
+  });
+  deleteButton.addEventListener("click", () => {
+    cardElement.remove();
+  });
+
+  cardImageEl.addEventListener("click", () => {
+    openPopop(previewImageModal);
+    previewImage.src = cardData.link;
+    previewImage.alt = cardData.name;
+    previewImageName.textContent = cardData.name;
+    return previewImageName;
   });
 
   // set the path to the image to the link field of the object
@@ -130,6 +149,10 @@ function handleProfileAddSubmit(e) {
 //   addItem(item) {
 //       this._container.prepend(item);
 //     }
+function handleImageClick(e) {
+  e.preventDefault();
+  closePopop(previewImageModal);
+}
 profileEditButton.addEventListener("click", () => {
   profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
@@ -145,10 +168,14 @@ addCardModalCloseButton.addEventListener("click", () => {
   closePopop(profileAddModal);
 });
 // profileEditModal.classList.remove("modal_opened");
+previewImageCloseButton.addEventListener("click", () => {
+  closePopop(previewImageModal);
+});
 
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 profileAddForm.addEventListener("submit", handleProfileAddSubmit);
 // for (let i = 0; i < initialCards.length; i++) {
 //   const card = initialCards[i];
 // }
+
 initialCards.forEach((cardData) => renderCard(cardData, cardListEl));

@@ -49,3 +49,19 @@
   opacity: 0.5;
   /* background: transparent url(../images/like-active.svg) center no-repeat;*/
 }
+
+.card__delete-button {
+  background: url(../images/delete-button.svg);
+  width: 18px;
+  height: 19.3px;
+  position: absolute;
+  margin: 18px 15px 245px 249px;
+  padding: 0;
+  cursor: pointer;
+  border: none;
+  color: #ffffff;
+}
+
+.card__delete-button:hover {
+  opacity: 0.6;
+}

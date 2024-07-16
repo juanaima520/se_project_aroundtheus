@@ -101,7 +101,30 @@
   opacity: 0.8;
 }
 
-@media screen and (max-width: 580px) {
+.modal__container-image{
+  max-width: 816px;
+  max-height: 540px;
+  padding:0;
+}
+
+.modal__preview-image {
+  max-width: 75vw;
+  max-height: 75vh;
+  display:flex;
+cursor: pointer;
+}
+
+.modal__image-name {
+  font-family: Inter, Arial, sans-serif
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14.52px;
+  width: 240px;
+  height: 12px;
+  position: absolute;
+}
+
+. @media screen and (max-width: 580px) {
   .modal__close {
     width: 26px;
     height: 26px;
@@ -132,5 +155,10 @@
     max-width: 238px;
     height: 46px;
     margin: 15px 0 0;
+  }
+
+  .modal__preview-image{
+    max-width: 240px;
+    height:299px;
   }
 }
