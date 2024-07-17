@@ -1,4 +1,5 @@
 .modal {
+  display: flex;
   position: fixed;
   top: 0;
   left: 0;
@@ -9,13 +10,13 @@
   padding: 0 19px;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.5s linear;
-  /* align-items: center;
-  justify-content: center; */
+  visibility: hidden;
+  transition: visibility opacity 0.5s linear;
 }
 
 .modal_opened {
   opacity: 1;
+  visibility: visible;
   pointer-events: auto;
   display: flex;
 }
@@ -158,6 +159,7 @@
     max-width: 238px;
     height: 46px;
     margin: 15px 0 0;
+    font-size: 14px;
   }
 
   .modal__preview-image {
