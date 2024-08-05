@@ -59,7 +59,7 @@ const cardListEl = document.querySelector(".cards__list");
 const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
 
-function handleOverlayClick(event) {
+function handleOverlayClose(event) {
   if (
     event.target.classList.contains("modal") ||
     event.target.classList.contains("modal__close")
@@ -67,7 +67,7 @@ function handleOverlayClick(event) {
     closePopup(event.currentTarget);
   }
 }
-function HandleEscClose(event) {
+function handleEscClose(event) {
   if (event.key === "Escape") {
     const openPopup = document.querySelector(".modal_opened");
     if (openPopup) {
@@ -78,14 +78,14 @@ function HandleEscClose(event) {
 
 function openPopup(modal) {
   modal.classList.add("modal_opened");
-  modal.addEventListener("click", handleOverlayClick);
-  document.addEventListener("keydown", HandleEscClose);
+  modal.addEventListener("click", handleOverlayClose);
+  document.addEventListener("keydown", handleEscClose);
 }
 
 function closePopup(modal) {
   modal.classList.remove("modal_opened");
-  modal.removeEventListener("click", handleOverlayClick);
-  document.removeEventListener("keydown", HandleEscClose);
+  modal.removeEventListener("click", handleOverlayClose);
+  document.removeEventListener("keydown", handleEscClose);
   // TODO remove listener from document
 }
 function renderCard(cardData) {
@@ -156,16 +156,16 @@ profileEditButton.addEventListener("click", () => {
 profileAddButton.addEventListener("click", () => {
   openPopup(profileAddModal);
 });
-profileModalCloseButton.addEventListener("click", () => {
-  closePopup(profileEditModal);
-});
-addCardModalCloseButton.addEventListener("click", () => {
-  closePopup(profileAddModal);
-});
-// profileEditModal.classList.remove("modal_opened");
-previewImageCloseButton.addEventListener("click", () => {
-  closePopup(previewImageModal);
-});
+// profileModalCloseButton.addEventListener("click", () => {
+//   closePopup(profileEditModal);
+// });
+// addCardModalCloseButton.addEventListener("click", () => {
+//   closePopup(profileAddModal);
+// });
+// // profileEditModal.classList.remove("modal_opened");
+// previewImageCloseButton.addEventListener("click", () => {
+//   closePopup(previewImageModal);
+// });
 
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 addCardForm.addEventListener("submit", handleProfileAddSubmit);
