@@ -124,18 +124,33 @@
             type="text"
             name="title"
             id="profile-title-input"
-            class="modal__input"
+            class="modal__input modal__input_type_error modal__error_visible"
+            minlength="2"
+            maxlength="40"
             required
           />
+          <span class="modal__error" id="profile-title-input-error"></span>
           <input
             placeholder="Description"
             type="text"
             name="description"
             id="profile-description-input"
-            class="modal__input"
+            class="modal__input modal__input_type_error modal__error_visible"
+            minlength="2"
+            maxlength="200"
             required
           />
-          <button class="modal__button" type="submit">Save</button>
+          <span
+            class="modal__error"
+            id="profile-description-input-error"
+          ></span>
+          <button
+            class="modal__button modal__button_disabled"
+            id="submitButton"
+            type="submit"
+          >
+            Save
+          </button>
         </form>
       </div>
     </div>
@@ -151,18 +166,29 @@
             type="text"
             name="title"
             id="card-title-input"
-            class="modal__input"
+            class="modal__input modal__input_type_error modal__error_visible"
+            minlength="1"
+            maxlength="30"
             required
           />
+          <span class="modal__error" id="card-title-input-error"></span>
           <input
             placeholder="Image URL"
-            type="text"
+            type="url"
             name="url"
             id="card-url-input"
-            class="modal__input"
+            class="modal__input modal__input_type_error modal__error_visible"
             required
           />
-          <button class="modal__button" type="submit">Save</button>
+          <span class="modal__error" id="card-url-input-error"></span>
+          <button
+            class="modal__button modal__button_disabled"
+            type="submit"
+            id="submitButton"
+            disabled
+          >
+            Save
+          </button>
         </form>
       </div>
     </div>
@@ -191,5 +217,6 @@
     </template>
 
     <script src="./scripts/index.js" defer></script>
+    <script src="./scripts/validation.js" defer></script>
   </body>
 </html>
