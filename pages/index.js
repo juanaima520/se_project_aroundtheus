@@ -1,3 +1,6 @@
+import Card from "../components/Card.js";
+import FormValidator from "../components/FormValidator.js";
+
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -89,9 +92,39 @@ function closePopup(modal) {
   // TODO remove listener from document
 }
 function renderCard(cardData) {
-  const cardElement = getCardElement(cardData);
-  cardListEl.prepend(cardElement);
+  // const cardElement = getCardElement(cardData);
+  const cardSelector = "#card-template";
+  const card = new Card(cardData, cardSelector, handleImageClick);
+  // 1. create an instance
+  // 2. pass element to prepend
+
+  cardListEl.prepend(card.getView());
 }
+function handleImageClick(name, link) {
+  openPopup(previewImageModal);
+  previewImage.src = link;
+  previewImage.alt = name;
+  previewImageName.textContent = name;
+}
+
+// validation
+const validationSettings = {
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__button",
+  inactiveButtonClass: "modal__button_disabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__error_visible",
+};
+
+const editFormElement = profileEditModal.querySelector(".modal__form");
+const addFormElement = profileAddModal.querySelector(".modal__form");
+const editFormValidator = new FormValidator(
+  validationSettings,
+  editFormElement
+);
+const addFormValidator = new FormValidator(validationSettings, addFormElement);
+editFormValidator.enableValidation();
+addFormValidator.enableValidation();
 
 function getCardElement(cardData) {
   // clone the template element with all its content and store it in a cardElement variable
