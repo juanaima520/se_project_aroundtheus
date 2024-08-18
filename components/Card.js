@@ -15,11 +15,11 @@ class Card {
   }
 
   _setEventListeners() {
-    // fix typo Event
     this._cardElement
       .querySelector(".card__like-button")
-      .addEventListener("click", () => {
-        this._cardElement.classList.toggle("card__like-button_active");
+      .addEventListener("click", (event) => {
+        event.target.classList.toggle("card__like-button_active");
+        console.log(this._cardElement);
       });
     this._cardElement
       .querySelector(".card__delete-button")
