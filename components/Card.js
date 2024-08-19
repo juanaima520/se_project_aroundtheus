@@ -21,6 +21,7 @@ class Card {
         event.target.classList.toggle("card__like-button_active");
         console.log(this._cardElement);
       });
+
     this._cardElement
       .querySelector(".card__delete-button")
       .addEventListener("click", () => {
@@ -29,11 +30,9 @@ class Card {
       });
 
     // pass name and link as arguments to handler
-    this._cardElement
-      .querySelector(".card__image")
-      .addEventListener("click", () =>
-        this._handleImageClick(this._name, this._link)
-      );
+    this._cardImage.addEventListener("click", () =>
+      this._handleImageClick(this._name, this._link)
+    );
   }
 
   // _handleLikeIcon() {}
@@ -42,9 +41,11 @@ class Card {
 
   getView() {
     this._cardElement = this._getTemplate();
-    this._setEventListeners();
-    this._cardElement.querySelector(".card__image").src = this._link;
+    this._cardImage = this._cardElement.querySelector(".card__image");
+    this._cardImage.src = this._link;
+    this._cardImage.alt = this._name;
     this._cardElement.querySelector(".card__title").textContent = this._name;
+    this._setEventListeners();
     return this._cardElement;
     // return the card element
   }

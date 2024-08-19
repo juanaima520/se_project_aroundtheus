@@ -62,7 +62,7 @@ const cardListEl = document.querySelector(".cards__list");
 const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
 
-function handleOverlayClose(event) {
+function handleModalClose(event) {
   if (
     event.target.classList.contains("modal") ||
     event.target.classList.contains("modal__close")
@@ -81,25 +81,29 @@ function handleEscClose(event) {
 
 function openPopup(modal) {
   modal.classList.add("modal_opened");
-  modal.addEventListener("click", handleOverlayClose);
+  modal.addEventListener("click", handleModalClose);
   document.addEventListener("keydown", handleEscClose);
 }
 
 function closePopup(modal) {
   modal.classList.remove("modal_opened");
-  modal.removeEventListener("click", handleOverlayClose);
+  modal.removeEventListener("click", handleModalClose);
   document.removeEventListener("keydown", handleEscClose);
   // TODO remove listener from document
 }
 function renderCard(cardData) {
   // const cardElement = getCardElement(cardData);
-  const cardSelector = "#card-template";
-  const card = new Card(cardData, cardSelector, handleImageClick);
+  const element = createCard(cardData);
   // 1. create an instance
   // 2. pass element to prepend
-
-  cardListEl.prepend(card.getView());
+  cardListEl.prepend(element);
 }
+function createCard(cardData) {
+  const cardSelector = "#card-template";
+  const card = new Card(cardData, cardSelector, handleImageClick);
+  return card.getView();
+}
+
 function handleImageClick(name, link) {
   openPopup(previewImageModal);
   previewImage.src = link;
@@ -116,13 +120,13 @@ const validationSettings = {
   errorClass: "modal__error_visible",
 };
 
-const editFormElement = profileEditModal.querySelector(".modal__form");
-const addFormElement = profileAddModal.querySelector(".modal__form");
+// const editFormElement = profileEditModal.querySelector(".modal__form");
+// const addFormElement = profileAddModal.querySelector(".modal__form");
 const editFormValidator = new FormValidator(
   validationSettings,
-  editFormElement
+  profileEditForm
 );
-const addFormValidator = new FormValidator(validationSettings, addFormElement);
+const addFormValidator = new FormValidator(validationSettings, addCardForm);
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
 
