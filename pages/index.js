@@ -118,17 +118,37 @@ const validationSettings = {
   inactiveButtonClass: "modal__button_disabled",
   inputErrorClass: "modal__input_type_error",
   errorClass: "modal__error_visible",
+  formSelector: ".modal__form",
 };
 
 // const editFormElement = profileEditModal.querySelector(".modal__form");
 // const addFormElement = profileAddModal.querySelector(".modal__form");
-const editFormValidator = new FormValidator(
-  validationSettings,
-  profileEditForm
-);
-const addFormValidator = new FormValidator(validationSettings, addCardForm);
-editFormValidator.enableValidation();
-addFormValidator.enableValidation();
+// const editFormValidator = new FormValidator(
+//   validationSettings,
+//   profileEditForm
+// );
+// const addFormValidator = new FormValidator(validationSettings, addCardForm);
+// editFormValidator.enableValidation();
+// addFormValidator.enableValidation();
+
+const formValidators = {
+  // 'add-card-form': "the actual instance of the formvalidator class for the add-card modal"
+};
+
+const enableValidation = (config) => {
+  const formList = Array.from(document.querySelectorAll(config.formSelector));
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(config, formElement);
+    // Here you get the name of the form (if you don’t have it then you need to add it into each form in `index.html` first)
+    const formName = formElement.getAttribute("name");
+
+    // Here you store the validator using the `name` of the form
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  });
+};
+
+enableValidation(validationSettings);
 
 function getCardElement(cardData) {
   // clone the template element with all its content and store it in a cardElement variable
@@ -177,6 +197,7 @@ function handleProfileAddSubmit(e) {
   renderCard({ name, link }, cardListEl);
   closePopup(profileAddModal);
   addCardForm.reset();
+  formValidators["add-card-form"].disabledSubmitButton();
 }
 
 // function handleImageClick(e) {
