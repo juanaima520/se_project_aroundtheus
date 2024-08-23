@@ -1,5 +1,6 @@
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
+import "./index.css";
 
 const initialCards = [
   {
@@ -91,15 +92,17 @@ function closePopup(modal) {
   document.removeEventListener("keydown", handleEscClose);
   // TODO remove listener from document
 }
+
+const cardSelector = "#card-template";
+
 function renderCard(cardData) {
   // const cardElement = getCardElement(cardData);
-  const element = createCard(cardData);
+  const cardElement = createCard(cardData, cardSelector);
   // 1. create an instance
   // 2. pass element to prepend
-  cardListEl.prepend(element);
+  cardListEl.prepend(cardElement);
 }
-function createCard(cardData) {
-  const cardSelector = "#card-template";
+function createCard(cardData, cardSelector) {
   const card = new Card(cardData, cardSelector, handleImageClick);
   return card.getView();
 }
@@ -121,8 +124,6 @@ const validationSettings = {
   formSelector: ".modal__form",
 };
 
-// const editFormElement = profileEditModal.querySelector(".modal__form");
-// const addFormElement = profileAddModal.querySelector(".modal__form");
 // const editFormValidator = new FormValidator(
 //   validationSettings,
 //   profileEditForm
