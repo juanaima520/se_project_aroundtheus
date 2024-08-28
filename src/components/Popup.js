@@ -12,7 +12,7 @@ class Popup {
     this._popupElement.removeEventListener("click", this._handleModalClose);
     document.removeEventListener("keydown", this._handleEscClose);
   }
-  _handleEscClose(event) {
+  _handleEscClose = (event) => {
     if (event.key === "Escape") {
       const openPopup = document.querySelector(".modal_opened");
       if (openPopup) {
@@ -20,16 +20,16 @@ class Popup {
         this.close();
       }
     }
-  }
-  _handleModalClose(event) {
+  };
+  _handleModalClose = (event) => {
     if (
       event.target.classList.contains("modal") ||
       event.target.classList.contains("modal__close")
     ) {
-    //   closePopup(event.currentTarget);
+      //   closePopup(event.currentTarget);
       this.close();
     }
-  }
+  };
   setEventListeners() {
     const closeButton = this._popupElement.querySelector(".modal__close");
     closeButton.addEventListener("click", () => {

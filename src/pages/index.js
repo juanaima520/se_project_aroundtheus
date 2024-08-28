@@ -30,12 +30,9 @@ const userInfo = new UserInfo({
   descriptionSelector: ".profile__description",
 });
 
-const handleProfileAddSubmit = () => {
+const handleProfileAddSubmit = ({ name, link }) => {
   addCardForm.reset();
   renderCard({ name, link });
-  const name = cardTitleInput.value;
-  const link = cardUrlInput.value;
-  renderCard({ name: name, link: url }, cardListEl);
   addCardPopup.close();
   // closePopup(profileAddModal);
   addCardForm.reset();
@@ -48,13 +45,13 @@ const addCardPopup = new PopupWithForm(
 );
 addCardPopup.setEventListeners();
 
-const handleProfileEditSubmit = () => {
+const handleProfileEditSubmit = ({ title, description }) => {
   userInfo.setUserInfo({ name: title, description: description });
   profileTitle.textContent = profileTitleInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
   profileEditForm.reset();
   // closePopup(profileEditModal);
-  editProfilePopup.close();
+  profileEditPopup.close();
 };
 
 const profileEditPopup = new PopupWithForm(
