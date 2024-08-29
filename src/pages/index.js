@@ -35,7 +35,6 @@ const handleProfileAddSubmit = ({ name, link }) => {
   renderCard({ name, link });
   addCardPopup.close();
   // closePopup(profileAddModal);
-  addCardForm.reset();
   formValidators["add-card-form"].disabledSubmitButton();
 };
 
@@ -47,9 +46,6 @@ addCardPopup.setEventListeners();
 
 const handleProfileEditSubmit = ({ title, description }) => {
   userInfo.setUserInfo({ name: title, description: description });
-  profileTitle.textContent = profileTitleInput.value;
-  profileDescription.textContent = profileDescriptionInput.value;
-  profileEditForm.reset();
   // closePopup(profileEditModal);
   profileEditPopup.close();
 };
