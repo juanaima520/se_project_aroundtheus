@@ -85,10 +85,7 @@ function handleImageClick(name, link) {
 const section = new Section(
   {
     items: initialCards,
-    renderer: (item) => {
-      const cardElement = createCard(item, "#card-template");
-      section.addItem(cardElement);
-    },
+    renderer: renderCard,
   },
   ".cards__list"
 );
@@ -101,7 +98,7 @@ function createCard(cardData, cardSelector) {
 
 function renderCard(cardData) {
   const cardElement = createCard(cardData, cardSelector);
-  cardListEl.prepend(cardElement);
+  section.addItem(cardElement);
 }
 
 // validation

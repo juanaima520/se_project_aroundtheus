@@ -4,12 +4,12 @@ class Popup {
   }
   open() {
     this._popupElement.classList.add("modal_opened");
-    // this._popupElement.addEventListener("click", this._handleModalClose);
+
     document.addEventListener("keydown", this._handleEscClose);
   }
   close() {
     this._popupElement.classList.remove("modal_opened");
-    this._popupElement.removeEventListener("click", this._handleModalClose);
+
     document.removeEventListener("keydown", this._handleEscClose);
   }
   _handleEscClose = (event) => {
@@ -30,10 +30,11 @@ class Popup {
     }
   };
   setEventListeners() {
-    const closeButton = this._popupElement.querySelector(".modal__close");
-    closeButton.addEventListener("click", () => {
-      this.close();
-    });
+    // const closeButton = this._popupElement.querySelector(".modal__close");
+    // closeButton.addEventListener("click", () => {
+    //   this.close();
+    // });
+    this._popupElement.addEventListener("click", this._handleModalClose);
   }
 }
 // _handleModalClose = () => {

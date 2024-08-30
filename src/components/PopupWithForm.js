@@ -8,10 +8,10 @@ class PopupWithForm extends Popup {
     this._inputList = [...this._popupForm.querySelectorAll(".modal__input")]; //Array.from
   }
 
-  close() {
-    // this._popupForm.reset();
-    super.close();
-  }
+  // close() {
+  //   // this._popupForm.reset();
+  //   super.close();
+  // }
 
   _getInputValues() {
     const inputValue = {};
