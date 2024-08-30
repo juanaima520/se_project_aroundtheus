@@ -33,7 +33,6 @@ const userInfo = new UserInfo({
 const handleProfileAddSubmit = ({ name, link }) => {
   addCardForm.reset();
   renderCard({ name, link });
-  addCardPopup.close();
   // closePopup(profileAddModal);
   formValidators["add-card-form"].disabledSubmitButton();
 };
@@ -47,7 +46,6 @@ addCardPopup.setEventListeners();
 const handleProfileEditSubmit = ({ title, description }) => {
   userInfo.setUserInfo({ name: title, description: description });
   // closePopup(profileEditModal);
-  profileEditPopup.close();
 };
 
 const profileEditPopup = new PopupWithForm(
@@ -90,7 +88,9 @@ const section = new Section(
   ".cards__list"
 );
 section.renderItems();
-
+// initialCards.forEach((item) => {
+//   section._renderer(item);
+// });
 function createCard(cardData, cardSelector) {
   const card = new Card(cardData, cardSelector, handleImageClick);
   return card.getView();
