@@ -1,7 +1,9 @@
 class Card {
-  constructor({ name, link }, cardSelector, handleImageClick) {
+  constructor({ _id, name, link, isLiked }, cardSelector, handleImageClick) {
+    this._id = _id;
     this._name = name;
     this._link = link;
+    this._isLiked = isLiked;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
   }
@@ -16,6 +18,7 @@ class Card {
     this._cardElement
       .querySelector(".card__like-button")
       .addEventListener("click", (event) => {
+        //if(this._isLiked)
         event.target.classList.toggle("card__like-button_active");
         console.log(this._cardElement);
       });

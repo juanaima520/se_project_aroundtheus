@@ -5,6 +5,8 @@ import UserInfo from "../components/UserInfo.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import "./index.css";
+import Api from "../components/Api.js";
+import PopupDelete from "../components/PopupDelete.js";
 
 import {
   initialCards,
@@ -25,29 +27,83 @@ import {
   cardSelector,
 } from "../utils/constants.js";
 
+const avatarEditButton = document.querySelector("#avatar-edit-button");
+const avatarForm = document.querySelector("#modal__form-avatar");
+const profileImage = document.querySelector(".profile__image");
+
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "65820eda-9ddf-4d15-8d65-d12582853dbd",
+    "Content-Type": "application/json",
+  },
+});
+// .then(res => res.json())
+// .then((result) => {
+//   console.log(result);
+// });
+
 const userInfo = new UserInfo({
   nameSelector: ".profile__title",
   descriptionSelector: ".profile__description",
+  avatarSelector: ".profile__image",
 });
 
 const handleProfileAddSubmit = ({ name, link }) => {
-  addCardForm.reset();
-  renderCard({ name, link });
-  // closePopup(profileAddModal);
-  formValidators["add-card-form"].disabledSubmitButton();
+  api
+    .addNewCard({ name, link })
+    .then((cardData) => {
+      renderCard({ name, link });
+      addCardPopup.close();
+      formValidators["add-card-form"].disabledSubmitButton();
+    })
+    .catch((err) => {
+      console.error(err);
+      alert(`Error ${err}. Could not add card.`);
+    });
 };
 
 const addCardPopup = new PopupWithForm(
   "#add-card-modal",
   handleProfileAddSubmit
 );
-addCardPopup.setEventListeners();
+addCardPopup.setEventListeners(); //indented
 
 const handleProfileEditSubmit = ({ title, description }) => {
-  userInfo.setUserInfo({ name: title, description: description });
+  api
+    .editUserInfo(title, description)
+    .then((userData) => {
+      userInfo.setUserInfo({ name: title, description: description });
+      profileEditPopup.close(); //close the edit-profile modal
+    })
+    .catch((err) => {
+      console.error(err);
+      alert(`Error ${err}. Could not edit user info.`);
+    });
+
   // closePopup(profileEditModal);
 };
+const avatarEditPopup = new PopupWithForm("#profile-avatar-modal");
+avatarEditPopup.setEventListeners();
 
+avatarEditButton.addEventListener("click", () => {
+  avatarEditPopup.open();
+});
+const confirming = new PopupDelete("#delete-card-modal");
+confirming.setEventListeners();
+function handleDelete(card) {
+  confirming.open();
+  confirming
+    .setConfirmSubmit(() => {
+      api.deleteCard().then(() => confirming.close());
+    })
+    .catch(err);
+}
+
+function handleLikeCard(card) {
+  if (!isliked) {
+  }
+}
 const profileEditPopup = new PopupWithForm(
   "#profile-edit-modal",
   handleProfileEditSubmit
@@ -80,24 +136,16 @@ function handleImageClick(name, link) {
   // openPopup(previewImageModal);
 }
 
-const section = new Section(
-  {
-    items: initialCards,
-    renderer: renderCard,
-  },
-  ".cards__list"
-);
-section.renderItems();
 // initialCards.forEach((item) => {
 //   section._renderer(item);
 // });
-function createCard(cardData, cardSelector) {
-  const card = new Card(cardData, cardSelector, handleImageClick);
+function createCard(cardData) {
+  const card = new Card(cardData, "#card-template", handleImageClick);
   return card.getView();
 }
 
 function renderCard(cardData) {
-  const cardElement = createCard(cardData, cardSelector);
+  const cardElement = createCard(cardData);
   section.addItem(cardElement);
 }
 
@@ -128,3 +176,33 @@ const enableValidation = (config) => {
 enableValidation(validationSettings);
 
 //initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
+//const cardElement = getCardElement(cardData);
+//cardListEl.prepend(cardElement);
+
+//runs on page load
+// gets user info from server and sets it on the dom
+api
+  .getUserInfo()
+  .then((userData) => {
+    console.log(userData); //{name: sldjf, about: skdf}
+    userInfo.setUserInfo({ name: userData.name, description: userData.about });
+  })
+  .catch((err) => {
+    console.error(err);
+    alert(`Error ${err}. Could not get user info.`);
+  });
+
+const section = new Section(
+  {
+    items: [],
+    renderer: renderCard,
+  },
+  ".cards__list"
+);
+
+//gets the cards off the server
+api.getInitialCards().then((cards) => {
+  section.setItems(cards.reverse());
+  section.renderItems();
+  console.log(cards);
+});

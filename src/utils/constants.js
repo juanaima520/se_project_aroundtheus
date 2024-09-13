@@ -48,6 +48,7 @@ export const cardListEl = document.querySelector(".cards__list");
 export const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
 export const cardSelector = "#card-template";
+
 export const validationSettings = {
   inputSelector: ".modal__input",
   submitButtonSelector: ".modal__button",
