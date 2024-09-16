@@ -4,6 +4,8 @@ class PopupWithForm extends Popup {
   constructor(popupSelector, handleFormSubmit) {
     super({ popupSelector });
     this._popupForm = this._popupElement.querySelector(".modal__form");
+    this._formButton = this._popupElement.querySelector(".modal__button");
+    this._formButtonText = this._formButton.textContent;
     this._handleFormSubmit = handleFormSubmit;
     this._inputList = [...this._popupForm.querySelectorAll(".modal__input")]; //Array.from
   }
@@ -19,6 +21,18 @@ class PopupWithForm extends Popup {
       inputValue[inputEl.name] = inputEl.value;
     });
     return inputValue;
+  }
+  setInputValues(inputValue) {
+    this._inputList.forEach((inputEl) => {
+      inputEl.value = inputValue[inputEl.name];
+    });
+  }
+
+  renderLoading(isLoading, loadingText = "saving") {
+    if (isLoading) {
+      this._formButton.textContent = loadingText;
+    }
+    return (this._formButton.textContent = this._formButtonText);
   }
   setEventListeners() {
     super.setEventListeners();

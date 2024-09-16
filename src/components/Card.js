@@ -1,11 +1,19 @@
 class Card {
-  constructor({ _id, name, link, isLiked }, cardSelector, handleImageClick) {
+  constructor(
+    { _id, name, link, isLiked },
+    cardSelector,
+    handleImageClick,
+    handleCardDelete,
+    handleLikeCard
+  ) {
     this._id = _id;
     this._name = name;
     this._link = link;
     this._isLiked = isLiked;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
+    this._handleCardDelete = handleCardDelete;
+    this._handleLikeCard = handleLikeCard;
   }
   _getTemplate() {
     return document
@@ -14,25 +22,58 @@ class Card {
       .cloneNode(true);
   }
 
+  // _setEventListeners() {
+  //   this._cardElement
+  //     .querySelector(".card__like-button")
+  //     .addEventListener("click", (event) => {
+  //       //if(this._isLiked)
+  //       event.target.classList.toggle("card__like-button_active");
+  //       console.log(this._cardElement);
+  //     });
+
+  //   this._cardElement
+  //     .querySelector(".card__delete-button")
+  //     .addEventListener("click", () => {
+  //       this._cardElement.remove();
+  //       this._cardElement = null;
+  //     });
+
+  //   this._cardImage.addEventListener("click", () =>
+  //     this._handleImageClick(this._name, this._link)
+  //   );
+  // }
   _setEventListeners() {
     this._cardElement
       .querySelector(".card__like-button")
-      .addEventListener("click", (event) => {
-        //if(this._isLiked)
-        event.target.classList.toggle("card__like-button_active");
-        console.log(this._cardElement);
+      .addEventListener("click", () => {
+        this._handleLikeCard(this);
       });
 
     this._cardElement
       .querySelector(".card__delete-button")
       .addEventListener("click", () => {
-        this._cardElement.remove();
-        this._cardElement = null;
+        this._handleCardDelete(this);
       });
 
     this._cardImage.addEventListener("click", () =>
       this._handleImageClick(this._name, this._link)
     );
+  }
+
+  _handleLikeIcon(event) {
+    if (this._isLiked) {
+      event.target.classList.toggle("card__like-button_active");
+    }
+  }
+
+  handleCardDelete() {
+    this._cardElement.remove();
+    this._cardElement = null;
+  }
+
+  updateIsLiked(isLiked) {
+    this._isliked = isLiked;
+    this._handleLikeIcon();
   }
 
   getView() {
