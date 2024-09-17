@@ -143,7 +143,7 @@ function handleLikeCard(card) {
     api
       .addLike(card._id)
       .then((res) => {
-        card.updatedIsLiked(res._isliked);
+        card.updateIsLiked(res._isliked);
       })
       .catch((err) => console.log(err));
   }

@@ -43,11 +43,9 @@ class Card {
   //   );
   // }
   _setEventListeners() {
-    this._cardElement
-      .querySelector(".card__like-button")
-      .addEventListener("click", () => {
-        this._handleLikeCard(this);
-      });
+    this._likeButton.addEventListener("click", () => {
+      this._handleLikeCard(this);
+    });
 
     this._cardElement
       .querySelector(".card__delete-button")
@@ -60,9 +58,9 @@ class Card {
     );
   }
 
-  _handleLikeIcon(event) {
+  _handleLikeIcon() {
     if (this._isLiked) {
-      event.target.classList.toggle("card__like-button_active");
+      this._likeButton.classList.toggle("card__like-button_active");
     }
   }
 
@@ -79,6 +77,7 @@ class Card {
   getView() {
     this._cardElement = this._getTemplate();
     this._cardImage = this._cardElement.querySelector(".card__image");
+    this._likeButton = this._cardElement.querySelector(".card__like-button");
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
     this._cardTitle = this._cardElement.querySelector(".card__title");
