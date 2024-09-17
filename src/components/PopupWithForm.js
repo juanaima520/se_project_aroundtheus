@@ -10,10 +10,9 @@ class PopupWithForm extends Popup {
     this._inputList = [...this._popupForm.querySelectorAll(".modal__input")]; //Array.from
   }
 
-  // close() {
-  //   // this._popupForm.reset();
-  //   super.close();
-  // }
+  close() {
+    super.close();
+  }
 
   _getInputValues() {
     const inputValue = {};
@@ -28,17 +27,19 @@ class PopupWithForm extends Popup {
     });
   }
 
-  renderLoading(isLoading, loadingText = "saving") {
+  renderLoading(isLoading, loadingText = "Saving..") {
     if (isLoading) {
       this._formButton.textContent = loadingText;
+    } else {
+      this._formButton.textContent = this._formButtonText;
     }
-    return (this._formButton.textContent = this._formButtonText);
   }
   setEventListeners() {
     super.setEventListeners();
     this._popupForm.addEventListener("submit", (e) => {
       e.preventDefault();
       this._handleFormSubmit(this._getInputValues());
+      this._popupForm.reset();
     });
   }
 }

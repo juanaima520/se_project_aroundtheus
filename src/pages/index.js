@@ -50,7 +50,7 @@ const handleProfileAddSubmit = ({ name, link }) => {
   api
     .addNewCard({ name, link })
     .then((cardData) => {
-      renderCard({ name, link });
+      renderCard(cardData);
       addCardPopup.close();
       formValidators["add-card-form"].disabledSubmitButton();
     })
@@ -122,28 +122,30 @@ const confirming = new PopupDelete("#delete-card-modal");
 confirming.setEventListeners();
 function handleDelete(card) {
   confirming.open();
-  confirming
-    .setConfirmSubmit(() => {
-      api.deleteCard(card._id).then(() => confirming.close());
-      card.handleCardDelete();
-    })
-    .catch((err) => console.log(err));
+  confirming.setConfirmSubmit(() => {
+    api
+      .deleteCard(card._id)
+      .then(() => {
+        confirming.close();
+        card.handleCardDelete();
+      })
+      .catch((err) => console.log(err));
+  });
 }
 
 function handleLikeCard(card) {
-  console.log(card);
-  if (card._isliked) {
+  if (card._isLiked) {
     api
       .removeLike(card._id)
       .then((res) => {
-        card.updateIsLiked(res._isliked);
+        card.updateIsLiked(res.isLiked);
       })
       .catch((err) => console.log(err));
   } else {
     api
       .addLike(card._id)
       .then((res) => {
-        card.updateIsLiked(res._isliked);
+        card.updateIsLiked(res.isLiked);
       })
       .catch((err) => console.log(err));
   }
@@ -223,16 +225,16 @@ enableValidation(validationSettings);
 
 //runs on page load
 // gets user info from server and sets it on the dom
-api
-  .getUserInfo()
-  .then((userData) => {
-    console.log(userData); //{name: sldjf, about: skdf}
-    userInfo.setUserInfo({ name: userData.name, description: userData.about });
-  })
-  .catch((err) => {
-    console.error(err);
-    alert(`Error ${err}. Could not get user info.`);
-  });
+// api
+//   .getUserInfo()
+//   .then((userData) => {
+//     console.log(userData); //{name: sldjf, about: skdf}
+
+//   })
+// .catch((err) => {
+//   console.error(err);
+//   alert(`Error ${err}. Could not get user info.`);
+// });
 
 const section = new Section(
   {
@@ -243,8 +245,18 @@ const section = new Section(
 );
 
 //gets the cards off the server
-api.getInitialCards().then((cards) => {
-  section.setItems(cards.reverse());
-  section.renderItems();
-  console.log(cards);
-});
+// api.getInitialCards().then((cards) => {
+
+//   console.log(cards);
+// });
+Promise.all([api.getInitialCards(), api.getUserInfo()])
+  .then(([initialCardData, userData]) => {
+    section.setItems(initialCardData.reverse());
+    section.renderItems();
+    userInfo.setUserInfo({ name: userData.name, description: userData.about });
+    userInfo.changeAvatar(userData.avatar);
+  })
+  .catch((err) => {
+    console.error(err);
+    // alert(`Error ${err}. Could not get user info.`);
+  });
