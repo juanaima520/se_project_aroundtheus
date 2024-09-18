@@ -52,6 +52,7 @@ const handleProfileAddSubmit = ({ name, link }) => {
     .then((cardData) => {
       renderCard(cardData);
       addCardPopup.close();
+      addCardPopup.resetForm();
       formValidators["add-card-form"].disabledSubmitButton();
     })
     .catch((err) => {
