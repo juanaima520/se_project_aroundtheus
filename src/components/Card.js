@@ -6,7 +6,7 @@ class Card {
     handleCardDelete,
     handleLikeCard
   ) {
-    this._id = _id;
+    this.id = _id;
     this._name = name;
     this._link = link;
     this._isLiked = isLiked;
@@ -56,6 +56,10 @@ class Card {
     this._cardImage.addEventListener("click", () =>
       this._handleImageClick(this._name, this._link)
     );
+  }
+
+  getIsLiked() {
+    return this._isLiked;
   }
 
   _handleLikeIcon() {

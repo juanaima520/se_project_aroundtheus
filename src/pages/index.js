@@ -120,30 +120,38 @@ avatarEditButton.addEventListener("click", () => {
 });
 const confirming = new PopupDelete("#delete-card-modal");
 confirming.setEventListeners();
+// runs when you click on the trash icon of a card
 function handleDelete(card) {
   confirming.open();
   confirming.setConfirmSubmit(() => {
+    // runs when you click 'yes' on the delete-card modal
+    //confirming.renderLoading(true);
+    confirming.setSubmitButtonText("Deleting...yay");
     api
-      .deleteCard(card._id)
+      .deleteCard(card.id)
       .then(() => {
         confirming.close();
         card.handleCardDelete();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => {
+        //confirming.renderLoading(false);
+        confirming.setSubmitButtonText("Yes");
+      });
   });
 }
 
 function handleLikeCard(card) {
-  if (card._isLiked) {
+  if (card.getIsLiked()) {
     api
-      .removeLike(card._id)
+      .removeLike(card.id)
       .then((res) => {
         card.updateIsLiked(res.isLiked);
       })
       .catch((err) => console.log(err));
   } else {
     api
-      .addLike(card._id)
+      .addLike(card.id)
       .then((res) => {
         card.updateIsLiked(res.isLiked);
       })
