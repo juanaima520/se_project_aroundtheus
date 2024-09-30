@@ -24,6 +24,7 @@ export const initialCards = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
   },
 ];
+//["Lago di Braies", "hhtp:sldfjld"]
 
 export const profileEditButton = document.querySelector("#profile-edit-button");
 export const profileEditModal = document.querySelector("#profile-edit-modal");
@@ -48,6 +49,7 @@ export const cardListEl = document.querySelector(".cards__list");
 export const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
 export const cardSelector = "#card-template";
+
 export const validationSettings = {
   inputSelector: ".modal__input",
   submitButtonSelector: ".modal__button",
